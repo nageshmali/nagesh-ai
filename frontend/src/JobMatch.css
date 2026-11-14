@@ -1,0 +1,388 @@
+
+.job-match-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.job-match-heading h1 {
+  font-size: 26px;
+  color: #172033;
+  margin-bottom: 8px;
+}
+
+.job-match-heading p {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.job-input-card,
+.result-summary,
+.assessment-card,
+.recommendation-card,
+.result-header {
+  background: white;
+  border: 1px solid #e8edf4;
+  border-radius: 14px;
+}
+
+.job-input-card {
+  padding: 24px;
+}
+
+.job-input-card label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 12px;
+}
+
+
+.job-input-card textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 220px;
+  padding: 15px;
+  background: #ffffff;
+  color: #1e293b;
+  color-scheme: light;
+  border: 1px solid #dbe2ea;
+  border-radius: 9px;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.job-input-card textarea::placeholder {
+  color: #94a3b8;
+  opacity: 1;
+}
+
+.job-input-card textarea:focus {
+  border-color: #6366f1;
+}
+
+
+.job-input-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.job-input-footer span {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.job-input-footer button {
+  padding: 12px 20px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.job-input-footer button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.job-error {
+  padding: 14px;
+  background: #fef2f2;
+  color: #dc2626;
+  border-radius: 9px;
+  font-size: 13px;
+}
+
+.job-loading {
+  padding: 18px;
+  background: #eef2ff;
+  color: #4338ca;
+  border-radius: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.job-result {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.result-header {
+  padding: 25px;
+}
+
+.result-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #6366f1;
+}
+
+.result-header h2 {
+  font-size: 25px;
+  color: #172033;
+  margin: 10px 0 6px;
+}
+
+.result-header p {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.result-summary,
+.recommendation-card {
+  padding: 22px;
+}
+
+.result-summary h3,
+.recommendation-card h3 {
+  font-size: 16px;
+  color: #172033;
+  margin-bottom: 12px;
+}
+
+.result-summary p,
+.recommendation-card p {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.8;
+}
+
+.result-assessments {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.assessment-card {
+  padding: 20px;
+}
+
+.assessment-card span {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.assessment-card h3 {
+  font-size: 18px;
+  color: #4f46e5;
+  margin-top: 10px;
+}
+
+.dark-mode .job-match-heading h1 {
+  color: #f8fafc;
+}
+
+.dark-mode .job-match-heading p {
+  color: #94a3b8;
+}
+
+.dark-mode .job-input-card,
+.dark-mode .result-summary,
+.dark-mode .assessment-card,
+.dark-mode .recommendation-card,
+.dark-mode .result-header {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.dark-mode .job-input-card label,
+.dark-mode .result-header h2,
+.dark-mode .result-summary h3,
+.dark-mode .recommendation-card h3 {
+  color: #f1f5f9;
+}
+
+.dark-mode .job-input-card textarea {
+  background: #0f172a;
+  color: #f8fafc;
+  color-scheme: dark;
+  border-color: #475569;
+}
+
+.dark-mode .job-input-card textarea::placeholder {
+  color: #94a3b8;
+}
+
+.dark-mode .result-header p,
+.dark-mode .result-summary p,
+.dark-mode .recommendation-card p,
+.dark-mode .assessment-card span {
+  color: #94a3b8;
+}
+
+.dark-mode .job-loading {
+  background: #312e81;
+  color: #c7d2fe;
+}
+
+@media (max-width: 600px) {
+  .job-input-card {
+    padding: 16px;
+  }
+
+  .result-assessments {
+    grid-template-columns: 1fr;
+  }
+
+  .job-input-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .job-input-footer button {
+    width: 100%;
+  }
+}
+
+
+/* Requirement Sections */
+
+.requirements-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.requirements-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.requirements-heading h3 {
+  font-size: 17px;
+  color: #172033;
+}
+
+.requirements-heading > span {
+  min-width: 28px;
+  padding: 5px 9px;
+  text-align: center;
+  background: #eef2ff;
+  color: #4f46e5;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.requirement-card {
+  padding: 18px 20px;
+  background: white;
+  border: 1px solid #e8edf4;
+  border-left: 4px solid #10b981;
+  border-radius: 10px;
+}
+
+.requirement-card.gap {
+  border-left-color: #f59e0b;
+}
+
+.requirement-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.requirement-top h4 {
+  font-size: 14px;
+  color: #1e293b;
+  line-height: 1.6;
+}
+
+.requirement-top > span {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: #059669;
+  background: #ecfdf5;
+  padding: 5px 9px;
+  border-radius: 20px;
+}
+
+.requirement-card.gap .requirement-top > span {
+  color: #b45309;
+  background: #fffbeb;
+}
+
+.requirement-meta {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.requirement-meta span {
+  font-size: 11px;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 4px 9px;
+  border-radius: 5px;
+  text-transform: capitalize;
+}
+
+.requirement-card > p {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.no-requirements {
+  padding: 18px;
+  background: white;
+  border: 1px solid #e8edf4;
+  border-radius: 10px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* Dark Mode */
+
+.dark-mode .requirements-heading h3 {
+  color: #f1f5f9;
+}
+
+.dark-mode .requirements-heading > span {
+  background: #312e81;
+  color: #c7d2fe;
+}
+
+.dark-mode .requirement-card,
+.dark-mode .no-requirements {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.dark-mode .requirement-card {
+  border-left-color: #10b981;
+}
+
+.dark-mode .requirement-card.gap {
+  border-left-color: #f59e0b;
+}
+
+.dark-mode .requirement-top h4 {
+  color: #f1f5f9;
+}
+
+.dark-mode .requirement-meta span {
+  background: #334155;
+  color: #cbd5e1;
+}
+
+.dark-mode .requirement-card > p,
+.dark-mode .no-requirements {
+  color: #94a3b8;
+}

@@ -49,3 +49,95 @@ class CandidateProfile(BaseModel):
     projects: list[Project] = Field(default_factory=list)
     achievements: list[str] = Field(default_factory=list)
     certifications: list[str] = Field(default_factory=list)
+
+
+from typing import Literal
+
+
+class RequirementMatch(BaseModel):
+    requirement: str
+    category: Literal[
+        "skill",
+        "education",
+        "experience",
+        "certification",
+        "other"
+    ]
+    importance: Literal[
+        "mandatory",
+        "preferred",
+        "unspecified"
+    ]
+    evidence: str
+    status: Literal[
+        "Demonstrated",
+        "Partially Demonstrated",
+        "Not Evident in Profile"
+    ]
+
+
+class JobMatchResult(BaseModel):
+    role_title: str | None = None
+
+    overall_assessment: Literal[
+        "Strong Match",
+        "Potential Match",
+        "Low Match",
+        "Insufficient Information"
+    ]
+
+    summary: str
+
+    matched_requirements: list[RequirementMatch] = Field(
+        default_factory=list
+    )
+
+    gaps_or_unverified_requirements: list[RequirementMatch] = Field(
+        default_factory=list
+    )
+
+    recommendation: str
+
+    technical_assessment: Literal[
+        "Strong",
+        "Moderate",
+        "Weak",
+        "Insufficient Information"
+    ]
+
+    eligibility_assessment: Literal[
+        "Meets Requirements",
+        "Does Not Meet Requirements",
+        "Needs Verification"
+    ]
+
+
+
+class JobRequirement(BaseModel):
+    description: str = Field(
+        description="A specific requirement extracted from the job description"
+    )
+
+    category: Literal[
+        "skill",
+        "education",
+        "experience",
+        "certification",
+        "other"
+    ]
+
+    importance: Literal[
+        "mandatory",
+        "preferred",
+        "unspecified"
+    ]
+
+
+class JobRequirements(BaseModel):
+    role_title: str | None = None
+
+    role_summary: str | None = None
+
+    requirements: list[JobRequirement] = Field(
+        default_factory=list
+    )

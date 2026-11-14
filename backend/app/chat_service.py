@@ -1,3 +1,4 @@
+
 import os
 import json
 from pathlib import Path
@@ -36,10 +37,14 @@ def load_candidate_profile():
     return candidate
 
 
-def chat_with_candidate(question: str):
+def chat_with_candidate(
+    question: str,
+    history: list[dict] | None = None
+):
 
     candidate = load_candidate_profile()
 
+    # Start with the system prompt and candidate profile
     messages = [
         {
             "role": "system",
@@ -48,13 +53,20 @@ def chat_with_candidate(question: str):
                 + "\n\nCANDIDATE PROFILE:\n"
                 + json.dumps(candidate, indent=4)
             )
-        },
-        {
-            "role": "user",
-            "content": question
         }
     ]
 
+    # Add previous conversation messages
+    if history:
+        messages.extend(history)
+
+    # Add the current recruiter question
+    messages.append({
+        "role": "user",
+        "content": question
+    })
+
+    # Send the complete conversation to the LLM
     response = client.chat.completions.create(
         model=MODEL,
         messages=messages,

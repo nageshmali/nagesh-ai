@@ -1,121 +1,162 @@
+
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
+import Chat from './Chat.jsx'
+import JobMatch from './JobMatch.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [activePage, setActivePage] = useState('home')
+  const [darkMode, setDarkMode] = useState(false)
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className={`app-container ${darkMode ? 'dark-mode' : ''}`}>
 
-      <div className="ticks"></div>
+      {/* Sidebar */}
+      <aside className="sidebar">
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+        <div className="brand">
+          <div className="brand-icon">N</div>
+          <h2>NageshAI</h2>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+        <div className="sidebar-menu">
+          <p className="menu-label">WORKSPACE</p>
+
+          <button
+            className={activePage === 'home' ? 'nav-item active' : 'nav-item'}
+            onClick={() => setActivePage('home')}
+          >
+            <span>⌂</span> Home
+          </button>
+
+          <button
+            className={activePage === 'chat' ? 'nav-item active' : 'nav-item'}
+            onClick={() => setActivePage('chat')}
+          >
+            <span>◉</span> Chat with NageshAI
+          </button>
+
+          <button
+            className={activePage === 'match' ? 'nav-item active' : 'nav-item'}
+            onClick={() => setActivePage('match')}
+          >
+            <span>⌕</span> Job Match Analyzer
+          </button>
+        </div>
+
+        <div className="sidebar-footer">
+          <p>AI-powered professional portfolio</p>
+          <span>Version 1.0</span>
+        </div>
+
+      </aside>
+
+      {/* Main Content */}
+      <main className="main-content">
+
+        {/* Top Navigation */}
+        <header className="topbar">
+
+          <span>Personal AI Portfolio</span>
+
+          <div className="header-actions">
+
+            <div className="status">
+              <span className="status-dot"></span>
+              AI Assistant
+            </div>
+
+            <button
+              className="theme-toggle"
+              onClick={() => setDarkMode(!darkMode)}
+            >
+              {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+            </button>
+
+          </div>
+
+        </header>
+
+        {/* Page Content */}
+        <section className="content-area">
+
+          {/* Home Page */}
+          {activePage === 'home' && (
+            <div className="welcome-section">
+
+              <span className="welcome-tag">
+                WELCOME TO NAGESHAI
+              </span>
+
+              <h1>
+                Your next conversation
+                <br />
+                starts here.
+              </h1>
+
+              <p className="welcome-description">
+                Explore Nagesh's technical background, projects,
+                skills and professional profile through an
+                AI-powered assistant.
+              </p>
+
+              {/* Feature Cards */}
+              <div className="feature-cards">
+
+                <div className="feature-card">
+
+                  <div className="feature-icon">💬</div>
+
+                  <h3>Chat with NageshAI</h3>
+
+                  <p>
+                    Ask questions about technical skills,
+                    education, projects and experience.
+                  </p>
+
+                  <button
+                    onClick={() => setActivePage('chat')}
+                  >
+                    Start Conversation →
+                  </button>
+
+                </div>
+
+                <div className="feature-card">
+
+                  <div className="feature-icon">📄</div>
+
+                  <h3>Job Match Analyzer</h3>
+
+                  <p>
+                    Submit a job description and evaluate
+                    how well the candidate matches the requirements.
+                  </p>
+
+                  <button
+                    onClick={() => setActivePage('match')}
+                  >
+                    Analyze Job →
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+          )}
+
+          {/* Chat Page */}
+          {activePage === 'chat' && <Chat />}
+
+          {/* Job Match Page */}
+          {activePage === 'match' && <JobMatch />}
+
+        </section>
+
+      </main>
+
+    </div>
   )
 }
 
