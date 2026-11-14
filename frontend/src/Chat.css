@@ -1,38 +1,56 @@
 
+/* ========================================
+   CHAT CONTAINER
+======================================== */
+
 .chat-container {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 205px);
-  min-height: 450px;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
   background: white;
   border: 1px solid #e8edf4;
   border-radius: 15px;
   overflow: hidden;
 }
 
+/* ========================================
+   CHAT HEADING
+======================================== */
+
 .chat-heading {
-  padding: 24px 28px;
+  flex-shrink: 0;
+  padding: 22px 26px;
   border-bottom: 1px solid #e8edf4;
 }
 
 .chat-heading h1 {
-  font-size: 24px;
+  font-size: 22px;
   color: #172033;
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 }
 
 .chat-heading p {
-  font-size: 14px;
+  font-size: 13px;
   color: #64748b;
 }
 
+/* ========================================
+   CHAT MESSAGES
+======================================== */
+
 .chat-messages {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
-  padding: 25px;
+  overflow-x: hidden;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 16px;
 }
 
 .chat-empty {
@@ -48,30 +66,40 @@
 }
 
 .chat-empty h2 {
-  font-size: 22px;
+  font-size: 21px;
   color: #172033;
   margin-bottom: 10px;
 }
 
 .chat-empty p {
   color: #64748b;
-  line-height: 1.7;
+  line-height: 1.6;
   font-size: 14px;
 }
 
+/* ========================================
+   MESSAGE BUBBLES
+======================================== */
+
 .message {
-  max-width: 78%;
+  max-width: 82%;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 7px;
 }
 
 .message.user {
   align-self: flex-end;
+  align-items: flex-end;
 }
 
 .message.assistant {
   align-self: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  text-align: left;
+  scroll-margin-top: 16px;
 }
 
 .message-label {
@@ -84,9 +112,11 @@
   padding: 13px 17px;
   border-radius: 12px;
   font-size: 14px;
-  line-height: 1.7;
+  line-height: 1.5;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+  text-align: left;
+  max-width: 100%;
 }
 
 .message.user .message-content {
@@ -96,10 +126,138 @@
 }
 
 .message.assistant .message-content {
+  width: fit-content;
+  max-width: 100%;
   background: #f1f5f9;
   color: #1e293b;
   border-bottom-left-radius: 3px;
 }
+
+/* ========================================
+   MARKDOWN FORMATTING
+======================================== */
+
+.message-content > * {
+  text-align: left;
+}
+
+.message-content p {
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+
+.message-content p:last-child {
+  margin-bottom: 0;
+}
+
+.message-content h1,
+.message-content h2,
+.message-content h3,
+.message-content h4 {
+  color: inherit;
+  line-height: 1.35;
+  margin: 13px 0 7px;
+}
+
+.message-content h1 {
+  font-size: 19px;
+}
+
+.message-content h2 {
+  font-size: 17px;
+}
+
+.message-content h3 {
+  font-size: 15px;
+}
+
+.message-content h4 {
+  font-size: 14px;
+}
+
+.message-content ul,
+.message-content ol {
+  padding-left: 23px;
+  margin: 5px 0 9px;
+  line-height: 1.5;
+}
+
+.message-content li {
+  margin: 2px 0;
+  padding-left: 2px;
+  line-height: 1.5;
+}
+
+.message-content li p {
+  display: inline;
+  margin: 0;
+  line-height: inherit;
+}
+
+.message-content li > ul,
+.message-content li > ol {
+  margin: 3px 0 5px;
+}
+
+.message-content strong {
+  font-weight: 700;
+}
+
+.message-content blockquote {
+  margin: 10px 0;
+  padding: 9px 13px;
+  border-left: 3px solid #6366f1;
+  background: rgba(99, 102, 241, 0.08);
+  border-radius: 4px;
+}
+
+.message-content pre {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 13px;
+  margin: 10px 0;
+  background: #1e293b;
+  color: #f8fafc;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.message-content code {
+  font-family: Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.message-content :not(pre) > code {
+  background: rgba(148, 163, 184, 0.2);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+.message-content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 13px;
+}
+
+.message-content th,
+.message-content td {
+  padding: 8px 11px;
+  border: 1px solid #cbd5e1;
+  text-align: left;
+}
+
+.message-content th {
+  background: #e2e8f0;
+  font-weight: 700;
+}
+
+/* ========================================
+   LOADING AND ERROR
+======================================== */
 
 .typing {
   color: #64748b !important;
@@ -114,21 +272,34 @@
   font-size: 13px;
 }
 
+/* ========================================
+   CHAT INPUT
+======================================== */
+
 .chat-input-area {
+  flex-shrink: 0;
   display: flex;
   gap: 12px;
-  padding: 18px 22px;
+  padding: 16px 20px;
   border-top: 1px solid #e8edf4;
+  background: white;
 }
 
 .chat-input-area input {
   flex: 1;
   min-width: 0;
   padding: 13px 16px;
+  background: white;
+  color: #1e293b;
   border: 1px solid #dbe2ea;
   border-radius: 9px;
   outline: none;
   font-size: 14px;
+}
+
+.chat-input-area input::placeholder {
+  color: #94a3b8;
+  opacity: 1;
 }
 
 .chat-input-area input:focus {
@@ -136,6 +307,7 @@
 }
 
 .chat-input-area button {
+  flex-shrink: 0;
   padding: 12px 22px;
   background: #4f46e5;
   color: white;
@@ -144,19 +316,26 @@
   font-weight: 600;
 }
 
+.chat-input-area button:hover:not(:disabled) {
+  background: #4338ca;
+}
+
 .chat-input-area button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
 .chat-disclaimer {
+  flex-shrink: 0;
   text-align: center;
-  padding: 0 12px 13px;
+  padding: 0 12px 12px;
   color: #94a3b8;
   font-size: 11px;
 }
 
-/* Dark Mode */
+/* ========================================
+   DARK MODE
+======================================== */
 
 .dark-mode .chat-container {
   background: #1e293b;
@@ -165,6 +344,7 @@
 
 .dark-mode .chat-heading,
 .dark-mode .chat-input-area {
+  background: #1e293b;
   border-color: #334155;
 }
 
@@ -190,24 +370,60 @@
   border-color: #475569;
 }
 
+.dark-mode .chat-input-area input::placeholder {
+  color: #94a3b8;
+}
+
+.dark-mode .message-content th,
+.dark-mode .message-content td {
+  border-color: #475569;
+}
+
+.dark-mode .message-content th {
+  background: #475569;
+}
+
+.dark-mode .message-content blockquote {
+  background: rgba(99, 102, 241, 0.15);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
+
 @media (max-width: 600px) {
-  .chat-container {
-    height: calc(100vh - 150px);
+  .chat-heading {
+    padding: 17px;
+  }
+
+  .chat-heading h1 {
+    font-size: 19px;
+  }
+
+  .chat-messages {
+    padding: 15px;
+    gap: 16px;
   }
 
   .message {
     max-width: 95%;
   }
 
-  .chat-heading {
-    padding: 18px;
-  }
-
-  .chat-messages {
-    padding: 15px;
+  .message-content {
+    padding: 11px 13px;
+    font-size: 13px;
   }
 
   .chat-input-area {
     padding: 12px;
+    gap: 8px;
+  }
+
+  .chat-input-area input {
+    padding: 11px;
+  }
+
+  .chat-input-area button {
+    padding: 11px 14px;
   }
 }

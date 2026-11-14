@@ -1,10 +1,18 @@
 
+/* ========================================
+   MAIN CONTAINER
+======================================== */
+
 .job-match-container {
   display: flex;
   flex-direction: column;
   gap: 24px;
   width: 100%;
 }
+
+/* ========================================
+   PAGE HEADING
+======================================== */
 
 .job-match-heading h1 {
   font-size: 26px;
@@ -18,18 +26,15 @@
   line-height: 1.6;
 }
 
-.job-input-card,
-.result-summary,
-.assessment-card,
-.recommendation-card,
-.result-header {
-  background: white;
-  border: 1px solid #e8edf4;
-  border-radius: 14px;
-}
+/* ========================================
+   JOB INPUT CARD
+======================================== */
 
 .job-input-card {
   padding: 24px;
+  background: white;
+  border: 1px solid #e8edf4;
+  border-radius: 14px;
 }
 
 .job-input-card label {
@@ -39,7 +44,6 @@
   color: #334155;
   margin-bottom: 12px;
 }
-
 
 .job-input-card textarea {
   width: 100%;
@@ -66,6 +70,9 @@
   border-color: #6366f1;
 }
 
+/* ========================================
+   INPUT FOOTER AND BUTTONS
+======================================== */
 
 .job-input-footer {
   display: flex;
@@ -75,12 +82,18 @@
   margin-top: 16px;
 }
 
-.job-input-footer span {
+.job-input-footer > span {
   font-size: 12px;
   color: #94a3b8;
 }
 
-.job-input-footer button {
+.job-input-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.job-input-actions button {
   padding: 12px 20px;
   background: #4f46e5;
   color: white;
@@ -88,12 +101,31 @@
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
 }
 
-.job-input-footer button:disabled {
+.job-input-actions button:hover:not(:disabled) {
+  background: #4338ca;
+}
+
+.job-input-actions button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.job-input-actions .reset-button {
+  background: white;
+  color: #475569;
+  border: 1px solid #dbe2ea;
+}
+
+.job-input-actions .reset-button:hover:not(:disabled) {
+  background: #f1f5f9;
+}
+
+/* ========================================
+   ERROR AND LOADING
+======================================== */
 
 .job-error {
   padding: 14px;
@@ -112,14 +144,25 @@
   text-align: center;
 }
 
+/* ========================================
+   RESULT CONTAINER
+======================================== */
+
 .job-result {
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
 
+/* ========================================
+   OVERALL ASSESSMENT
+======================================== */
+
 .result-header {
   padding: 25px;
+  background: white;
+  border: 1px solid #e8edf4;
+  border-radius: 14px;
 }
 
 .result-label {
@@ -140,9 +183,16 @@
   color: #64748b;
 }
 
+/* ========================================
+   SUMMARY AND RECOMMENDATION
+======================================== */
+
 .result-summary,
 .recommendation-card {
   padding: 22px;
+  background: white;
+  border: 1px solid #e8edf4;
+  border-radius: 14px;
 }
 
 .result-summary h3,
@@ -159,6 +209,10 @@
   line-height: 1.8;
 }
 
+/* ========================================
+   TECHNICAL AND ELIGIBILITY ASSESSMENT
+======================================== */
+
 .result-assessments {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -167,6 +221,9 @@
 
 .assessment-card {
   padding: 20px;
+  background: white;
+  border: 1px solid #e8edf4;
+  border-radius: 14px;
 }
 
 .assessment-card span {
@@ -178,76 +235,12 @@
   font-size: 18px;
   color: #4f46e5;
   margin-top: 10px;
+  line-height: 1.5;
 }
 
-.dark-mode .job-match-heading h1 {
-  color: #f8fafc;
-}
-
-.dark-mode .job-match-heading p {
-  color: #94a3b8;
-}
-
-.dark-mode .job-input-card,
-.dark-mode .result-summary,
-.dark-mode .assessment-card,
-.dark-mode .recommendation-card,
-.dark-mode .result-header {
-  background: #1e293b;
-  border-color: #334155;
-}
-
-.dark-mode .job-input-card label,
-.dark-mode .result-header h2,
-.dark-mode .result-summary h3,
-.dark-mode .recommendation-card h3 {
-  color: #f1f5f9;
-}
-
-.dark-mode .job-input-card textarea {
-  background: #0f172a;
-  color: #f8fafc;
-  color-scheme: dark;
-  border-color: #475569;
-}
-
-.dark-mode .job-input-card textarea::placeholder {
-  color: #94a3b8;
-}
-
-.dark-mode .result-header p,
-.dark-mode .result-summary p,
-.dark-mode .recommendation-card p,
-.dark-mode .assessment-card span {
-  color: #94a3b8;
-}
-
-.dark-mode .job-loading {
-  background: #312e81;
-  color: #c7d2fe;
-}
-
-@media (max-width: 600px) {
-  .job-input-card {
-    padding: 16px;
-  }
-
-  .result-assessments {
-    grid-template-columns: 1fr;
-  }
-
-  .job-input-footer {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .job-input-footer button {
-    width: 100%;
-  }
-}
-
-
-/* Requirement Sections */
+/* ========================================
+   REQUIREMENTS SECTIONS
+======================================== */
 
 .requirements-section {
   display: flex;
@@ -259,6 +252,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
   margin-bottom: 4px;
 }
 
@@ -277,6 +271,10 @@
   font-size: 12px;
   font-weight: 700;
 }
+
+/* ========================================
+   INDIVIDUAL REQUIREMENT CARDS
+======================================== */
 
 .requirement-card {
   padding: 18px 20px;
@@ -320,6 +318,7 @@
 
 .requirement-meta {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin: 12px 0;
 }
@@ -348,21 +347,64 @@
   font-size: 13px;
 }
 
-/* Dark Mode */
+/* ========================================
+   DARK MODE
+======================================== */
 
+.dark-mode .job-match-heading h1 {
+  color: #f8fafc;
+}
+
+.dark-mode .job-match-heading p {
+  color: #94a3b8;
+}
+
+.dark-mode .job-input-card,
+.dark-mode .result-header,
+.dark-mode .result-summary,
+.dark-mode .recommendation-card,
+.dark-mode .assessment-card,
+.dark-mode .requirement-card,
+.dark-mode .no-requirements {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.dark-mode .job-input-card label,
+.dark-mode .result-header h2,
+.dark-mode .result-summary h3,
+.dark-mode .recommendation-card h3,
 .dark-mode .requirements-heading h3 {
   color: #f1f5f9;
+}
+
+.dark-mode .job-input-card textarea {
+  background: #0f172a;
+  color: #f8fafc;
+  color-scheme: dark;
+  border-color: #475569;
+}
+
+.dark-mode .job-input-card textarea::placeholder {
+  color: #94a3b8;
+}
+
+.dark-mode .result-header p,
+.dark-mode .result-summary p,
+.dark-mode .recommendation-card p,
+.dark-mode .assessment-card span,
+.dark-mode .requirement-card > p,
+.dark-mode .no-requirements {
+  color: #94a3b8;
+}
+
+.dark-mode .assessment-card h3 {
+  color: #a5b4fc;
 }
 
 .dark-mode .requirements-heading > span {
   background: #312e81;
   color: #c7d2fe;
-}
-
-.dark-mode .requirement-card,
-.dark-mode .no-requirements {
-  background: #1e293b;
-  border-color: #334155;
 }
 
 .dark-mode .requirement-card {
@@ -382,7 +424,76 @@
   color: #cbd5e1;
 }
 
-.dark-mode .requirement-card > p,
-.dark-mode .no-requirements {
-  color: #94a3b8;
+.dark-mode .job-loading {
+  background: #312e81;
+  color: #c7d2fe;
+}
+
+.dark-mode .job-input-actions .reset-button {
+  background: #334155;
+  color: #f1f5f9;
+  border-color: #475569;
+}
+
+.dark-mode .job-input-actions .reset-button:hover:not(:disabled) {
+  background: #475569;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
+
+@media (max-width: 768px) {
+  .job-match-heading h1 {
+    font-size: 23px;
+  }
+
+  .result-assessments {
+    grid-template-columns: 1fr;
+  }
+
+  .requirement-top {
+    flex-direction: column;
+  }
+
+  .requirement-top > span {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .job-input-card {
+    padding: 16px;
+  }
+
+  .job-input-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .job-input-actions {
+    width: 100%;
+  }
+
+  .job-input-actions button {
+    flex: 1;
+  }
+
+  .result-header,
+  .result-summary,
+  .recommendation-card {
+    padding: 18px;
+  }
+
+  .assessment-card {
+    padding: 16px;
+  }
+
+  .requirements-heading h3 {
+    font-size: 15px;
+  }
+
+  .requirement-card {
+    padding: 15px;
+  }
 }

@@ -8,6 +8,7 @@ function JobMatch() {
   const [result, setResult] = useState(null)
   const [error, setError] = useState('')
 
+  // Analyze Job Description
   async function handleAnalyze() {
     if (!jobDescription.trim() || loading) return
 
@@ -40,9 +41,17 @@ function JobMatch() {
     }
   }
 
+  // Reset Analysis
+  function handleReset() {
+    setJobDescription('')
+    setResult(null)
+    setError('')
+  }
+
   return (
     <div className="job-match-container">
 
+      {/* Page Heading */}
       <div className="job-match-heading">
         <h1>Job Match Analyzer</h1>
         <p>
@@ -53,6 +62,7 @@ function JobMatch() {
 
       {/* Job Description Input */}
       <div className="job-input-card">
+
         <label htmlFor="job-description">
           Job Description
         </label>
@@ -66,23 +76,45 @@ function JobMatch() {
         />
 
         <div className="job-input-footer">
-          <span>{jobDescription.length} characters</span>
 
-          <button
-            onClick={handleAnalyze}
-            disabled={!jobDescription.trim() || loading}
-          >
-            {loading ? 'Analyzing...' : 'Analyze Job →'}
-          </button>
+          <span>
+            {jobDescription.length} characters
+          </span>
+
+          <div className="job-input-actions">
+
+            <button
+              className="reset-button"
+              onClick={handleReset}
+              disabled={
+                loading ||
+                (!jobDescription.trim() && !result && !error)
+              }
+            >
+              Reset
+            </button>
+
+            <button
+              onClick={handleAnalyze}
+              disabled={!jobDescription.trim() || loading}
+            >
+              {loading ? 'Analyzing...' : 'Analyze Job →'}
+            </button>
+
+          </div>
+
         </div>
+
       </div>
 
-      {/* Error */}
+      {/* Error Message */}
       {error && (
-        <div className="job-error">{error}</div>
+        <div className="job-error">
+          {error}
+        </div>
       )}
 
-      {/* Loading */}
+      {/* Loading Message */}
       {loading && (
         <div className="job-loading">
           Analyzing the job description against Nagesh's profile...
@@ -95,19 +127,29 @@ function JobMatch() {
 
           {/* Overall Assessment */}
           <div className="result-header">
-            <span className="result-label">OVERALL ASSESSMENT</span>
+
+            <span className="result-label">
+              OVERALL ASSESSMENT
+            </span>
+
             <h2>{result.overall_assessment}</h2>
+
             <p>{result.role_title || 'Job Role'}</p>
+
           </div>
 
-          {/* Summary */}
+          {/* Evaluation Summary */}
           <div className="result-summary">
+
             <h3>Evaluation Summary</h3>
+
             <p>{result.summary}</p>
+
           </div>
 
-          {/* Technical and Eligibility */}
+          {/* Technical and Eligibility Assessment */}
           <div className="result-assessments">
+
             <div className="assessment-card">
               <span>Technical Assessment</span>
               <h3>{result.technical_assessment}</h3>
@@ -117,76 +159,127 @@ function JobMatch() {
               <span>Eligibility Assessment</span>
               <h3>{result.eligibility_assessment}</h3>
             </div>
+
           </div>
 
-          {/* Recommendation */}
+          {/* AI Recommendation */}
           <div className="recommendation-card">
+
             <h3>AI Recommendation</h3>
+
             <p>{result.recommendation}</p>
+
           </div>
 
           {/* Matched Requirements */}
           <div className="requirements-section">
+
             <div className="requirements-heading">
               <h3>Matched Requirements</h3>
-              <span>{result.matched_requirements.length}</span>
+
+              <span>
+                {result.matched_requirements.length}
+              </span>
             </div>
 
             {result.matched_requirements.length > 0 ? (
+
               result.matched_requirements.map((item, index) => (
-                <div className="requirement-card matched" key={index}>
+
+                <div
+                  className="requirement-card matched"
+                  key={index}
+                >
+
                   <div className="requirement-top">
+
                     <h4>{item.requirement}</h4>
+
                     <span>{item.status}</span>
+
                   </div>
 
                   <div className="requirement-meta">
+
                     <span>{item.category}</span>
+
                     <span>{item.importance}</span>
+
                   </div>
 
                   <p>{item.evidence}</p>
+
                 </div>
+
               ))
+
             ) : (
+
               <p className="no-requirements">
                 No fully matched requirements found.
               </p>
+
             )}
+
           </div>
 
           {/* Gaps and Unverified Requirements */}
           <div className="requirements-section">
+
             <div className="requirements-heading">
+
               <h3>Gaps &amp; Unverified Requirements</h3>
-              <span>{result.gaps_or_unverified_requirements.length}</span>
+
+              <span>
+                {result.gaps_or_unverified_requirements.length}
+              </span>
+
             </div>
 
             {result.gaps_or_unverified_requirements.length > 0 ? (
+
               result.gaps_or_unverified_requirements.map((item, index) => (
-                <div className="requirement-card gap" key={index}>
+
+                <div
+                  className="requirement-card gap"
+                  key={index}
+                >
+
                   <div className="requirement-top">
+
                     <h4>{item.requirement}</h4>
+
                     <span>{item.status}</span>
+
                   </div>
 
                   <div className="requirement-meta">
+
                     <span>{item.category}</span>
+
                     <span>{item.importance}</span>
+
                   </div>
 
                   <p>{item.evidence}</p>
+
                 </div>
+
               ))
+
             ) : (
+
               <p className="no-requirements">
                 No gaps or unverified requirements found.
               </p>
+
             )}
+
           </div>
 
         </div>
       )}
+
     </div>
   )
 }

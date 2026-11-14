@@ -1,6 +1,8 @@
 from app.requirement_extractor import extract_job_requirements
 from app.candidate_evaluator import evaluate_candidate
 from typing import Literal
+from fastapi.responses import StreamingResponse
+from app.chat_service import stream_chat_with_candidate
 
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
@@ -63,6 +65,22 @@ def chat(request: ChatRequest):
         "answer": answer
     }
 
+
+@app.post("/chat/stream")
+def chat_stream(request: ChatRequest):
+
+    history = [
+        message.model_dump()
+        for message in request.history
+    ]
+
+    return StreamingResponse(
+        stream_chat_with_candidate(
+            question=request.question,
+            history=history
+        ),
+        media_type="text/plain"
+    )
 
 @app.post("/match-job")
 def match_job(request: JobMatchRequest):

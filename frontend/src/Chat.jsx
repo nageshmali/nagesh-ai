@@ -1,5 +1,7 @@
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import './Chat.css'
 
 function Chat() {
@@ -7,6 +9,15 @@ function Chat() {
   const [messages, setMessages] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  const latestAssistantRef = useRef(null)
+
+  useEffect(() => {
+    latestAssistantRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
+  }, [messages])
 
   async function handleSubmit(event) {
     event.preventDefault()
@@ -19,8 +30,17 @@ function Chat() {
     setError('')
     setLoading(true)
 
+    // Add the user question and an empty assistant message
+    const updatedMessages = [
+      ...messages,
+      { role: 'user', content: currentQuestion },
+      { role: 'assistant', content: '' },
+    ]
+
+    setMessages(updatedMessages)
+
     try {
-      const response = await fetch('http://127.0.0.1:8000/chat', {
+      const response = await fetch('http://127.0.0.1:8000/chat/stream', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,17 +55,51 @@ function Chat() {
         throw new Error('Failed to get a response from NageshAI.')
       }
 
-      const data = await response.json()
+      if (!response.body) {
+        throw new Error('Streaming response is not supported by this browser.')
+      }
 
-      setMessages((previousMessages) => [
-        ...previousMessages,
-        { role: 'user', content: currentQuestion },
-        { role: 'assistant', content: data.answer },
-      ])
+      const reader = response.body.getReader()
+      const decoder = new TextDecoder()
+
+      while (true) {
+        const { value, done } = await reader.read()
+
+        if (done) break
+
+        const chunk = decoder.decode(value, { stream: true })
+
+        setMessages((previousMessages) => {
+          const updated = [...previousMessages]
+          const lastIndex = updated.length - 1
+
+          updated[lastIndex] = {
+            ...updated[lastIndex],
+            content: updated[lastIndex].content + chunk,
+          }
+
+          return updated
+        })
+      }
+
+      const remaining = decoder.decode()
+
+      if (remaining) {
+        setMessages((previousMessages) => {
+          const updated = [...previousMessages]
+          const lastIndex = updated.length - 1
+
+          updated[lastIndex] = {
+            ...updated[lastIndex],
+            content: updated[lastIndex].content + remaining,
+          }
+
+          return updated
+        })
+      }
 
     } catch (err) {
       setError(err.message || 'Something went wrong.')
-      setQuestion(currentQuestion)
     } finally {
       setLoading(false)
     }
@@ -77,6 +131,12 @@ function Chat() {
         {messages.map((message, index) => (
           <div
             key={index}
+            ref={
+              message.role === 'assistant' &&
+              index === messages.length - 1
+                ? latestAssistantRef
+                : null
+            }
             className={`message ${message.role}`}
           >
             <div className="message-label">
@@ -84,19 +144,16 @@ function Chat() {
             </div>
 
             <div className="message-content">
-              {message.content}
+              {message.role === 'assistant' ? (
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {message.content}
+                </ReactMarkdown>
+              ) : (
+                message.content
+              )}
             </div>
           </div>
         ))}
-
-        {loading && (
-          <div className="message assistant">
-            <div className="message-label">NageshAI</div>
-            <div className="message-content typing">
-              Thinking...
-            </div>
-          </div>
-        )}
 
         {error && (
           <div className="chat-error">
@@ -119,7 +176,7 @@ function Chat() {
           type="submit"
           disabled={!question.trim() || loading}
         >
-          {loading ? 'Sending...' : 'Send ↑'}
+          {loading ? 'Generating...' : 'Send ↑'}
         </button>
       </form>
 

@@ -77,3 +77,43 @@ def chat_with_candidate(
     answer = response.choices[0].message.content
 
     return answer
+
+
+def stream_chat_with_candidate(
+    question: str,
+    history: list[dict] | None = None
+):
+    candidate = load_candidate_profile()
+
+    messages = [
+        {
+            "role": "system",
+            "content": (
+                SYSTEM_PROMPT
+                + "\n\nCANDIDATE PROFILE:\n"
+                + json.dumps(candidate, indent=4)
+            )
+        }
+    ]
+
+    if history:
+        messages.extend(history)
+
+    messages.append({
+        "role": "user",
+        "content": question
+    })
+
+    stream = client.chat.completions.create(
+        model=MODEL,
+        messages=messages,
+        temperature=0.3,
+        max_tokens=1000,
+        stream=True
+    )
+
+    for chunk in stream:
+        content = chunk.choices[0].delta.content
+
+        if content:
+            yield content
