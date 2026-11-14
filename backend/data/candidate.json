@@ -1,0 +1,170 @@
+{
+    "personal_info": {
+        "full_name": "Nagesh Mali",
+        "email": "malinagesh60@gmail.com",
+        "phone": "+91-9373874643",
+        "location": "Chennai, India",
+        "linkedin_url": "https://www.linkedin.com/in/nagesh-mali/",
+        "github_url": "https://github.com/nageshmali",
+        "portfolio_url": null
+    },
+    "education": [
+        {
+            "degree": "M.Tech",
+            "specialization": "Computer Science and Engineering",
+            "institution": "Vellore Institute of Technology",
+            "start_year": 2024,
+            "graduation_year": 2026,
+            "grade": "9.31"
+        },
+        {
+            "degree": "B.Tech",
+            "specialization": "Computer Science and Engineering",
+            "institution": "N.K. Orchid College of Engineering",
+            "start_year": 2020,
+            "graduation_year": 2024,
+            "grade": "8.71"
+        },
+        {
+            "degree": "Higher Secondary",
+            "specialization": null,
+            "institution": "Sinhgad Public School",
+            "start_year": null,
+            "graduation_year": 2020,
+            "grade": "76.40%"
+        },
+        {
+            "degree": "Secondary",
+            "specialization": null,
+            "institution": "S.R. Chandak English Highschool",
+            "start_year": null,
+            "graduation_year": 2018,
+            "grade": "88.20%"
+        }
+    ],
+    "skills": {
+        "programming_languages": [
+            "Python",
+            "C++",
+            "JavaScript"
+        ],
+        "frameworks": [
+            "React.js",
+            "Flask",
+            "Node.js",
+            "Express",
+            "Streamlit"
+        ],
+        "libraries": [
+            "LangChain",
+            "FAISS",
+            "NumPy",
+            "Pandas",
+            "Puppeteer",
+            "Cheerio",
+            "Mongoose",
+            "Axios",
+            "Tailwind CSS"
+        ],
+        "databases": [
+            "MySQL",
+            "MongoDB"
+        ],
+        "tools_and_platforms": [
+            "Git",
+            "GitHub",
+            "Linux",
+            "AWS Cloud",
+            "IBM Kingston processor",
+            "Google Gemini API",
+            "Groq LLM API",
+            "TMDB API"
+        ],
+        "core_concepts": [
+            "Machine Learning",
+            "Artificial Intelligence",
+            "Natural Language Processing",
+            "RAG",
+            "RESTful APIs",
+            "SDLC",
+            "SOLID Principles",
+            "HTML",
+            "CSS"
+        ]
+    },
+    "experience": [],
+    "projects": [
+        {
+            "title": "AI Legal Document Summarizer",
+            "description": "Built a legal document summarization platform ingesting Pdf/Docx files, implementing a RAG pipeline with FAISS. Integrated Google Gemini 2.5 Flash to generate three audience-specific summary levels (Executive, Standard, Detailed) with prompts, reducing manual case review time significantly. Implemented graceful RAG fallback mechanism to direct LLM inference ensuring zero user-facing failures during vector search errors. Exposed modular REST endpoints along with file validation, secure filename handling, and automatic cleanup of uploaded files post-processing to prevent sensitive legal data retention.",
+            "technologies": [
+                "Python",
+                "Flask",
+                "LangChain",
+                "Google Gemini API",
+                "FAISS"
+            ],
+            "key_features": [
+                "Ingests PDF/Docx files",
+                "Implements RAG pipeline with FAISS",
+                "Generates three audience-specific summary levels (Executive, Standard, Detailed)",
+                "Implements graceful RAG fallback mechanism",
+                "Exposes modular REST endpoints with file validation and secure filename handling",
+                "Automatic cleanup of uploaded files post-processing"
+            ],
+            "github_url": "https://github.com/nageshmali/",
+            "live_url": null
+        },
+        {
+            "title": "QuantumRecSys - Hybrid Quantum-Classical Movie Recommendation System",
+            "description": "Built a Hybrid Quantum-Classical Movie Recommender on MovieLens 1M, combining Variational QPCA, and TF-IDF filtering. Implemented a 5-qubit variational quantum circuit validated on IBM Kingston 156-qubit Heron r2 processor, achieving +44.1% Precision@10 over classical baseline. Outperformed +89.1% R@10 by fusing quantum, collaborative, and content-based scores. Deployed full-stack Streamlit app with tmdb API, user auth, watchlist, and three-model comparison dashboard.",
+            "technologies": [
+                "Python",
+                "Variational QPCA",
+                "TF-IDF",
+                "Streamlit",
+                "IBM Kingston processor",
+                "TMDB API",
+                "MovieLens 1M"
+            ],
+            "key_features": [
+                "Combines Variational QPCA and TF-IDF filtering",
+                "Implements 5-qubit variational quantum circuit",
+                "Validated on IBM Kingston 156-qubit Heron r2 processor",
+                "Achieved +44.1% Precision@10 over classical baseline",
+                "Outperformed +89.1% R@10 by fusing quantum, collaborative, and content-based scores",
+                "Deployed full-stack Streamlit app with user auth, watchlist, and three-model comparison dashboard"
+            ],
+            "github_url": "https://github.com/nageshmali/hybrid-recsys",
+            "live_url": "https://hybrid-recsys.streamlit.app/"
+        },
+        {
+            "title": "AI-Powered Article Scraper & Enhancer",
+            "description": "Implemented a 3-phase full-stack MERN pipeline: scraping articles via Puppeteer/Cheerio, storing in MongoDB Atlas with duplicate detection, and enhancing content through Groq LLM API. Built RESTful Node.js/Express backend handling scrape triggers, AI enhancement endpoints, and structured metadata storage (title, author, URL, content) with mongoose schemas. Integrated Groq LLM API to autonomously rewrite and enhance scraped articles, storing AI-generated versions linked to their originals in MongoDB. Developed a responsive React frontend with Tailwind CSS to display side-by-side original and AI-enhanced articles fetched via axios from the backend API.",
+            "technologies": [
+                "ReactJS",
+                "Groq LLM API",
+                "MongoDB",
+                "Node.js",
+                "Express",
+                "Puppeteer",
+                "Cheerio",
+                "Mongoose",
+                "Tailwind CSS",
+                "Axios"
+            ],
+            "key_features": [
+                "3-phase full-stack MERN pipeline",
+                "Scrapes articles via Puppeteer/Cheerio",
+                "Stores data in MongoDB Atlas with duplicate detection",
+                "Enhances content through Groq LLM API",
+                "RESTful Node.js/Express backend with structured metadata storage",
+                "Responsive React frontend displaying side-by-side original and AI-enhanced articles"
+            ],
+            "github_url": "https://github.com/nageshmali/ScrapeAndEnhance",
+            "live_url": null
+        }
+    ],
+    "achievements": [],
+    "certifications": []
+}

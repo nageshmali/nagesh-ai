@@ -20,6 +20,7 @@ class Education(BaseModel):
 class Skills(BaseModel):
     programming_languages:list[str] = Field(default_factory=list) 
     frameworks:list[str] = Field(default_factory=list)
+    libraries: list[str] = Field(default_factory=list)
     databases:list[str] = Field(default_factory=list)
     tools_and_platforms:list[str] = Field(default_factory=list)
     core_concepts:list[str] =Field(default_factory=list)
